@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         background: '#8b0e04',
         color:'white',
         padding: '20px',
-        // textAlign:'center',
+        // textAlign:'center',  
         // alignItems: 'center'
         marginTop: 5,
         marginBottom:20,
@@ -29,10 +29,10 @@ const useStyles = makeStyles({
 export default function Quotebox(props) {
 
     const classes = useStyles();
-    console.log(props.imagePath)
+    // console.log(props.imagePath)
 
     return (
-        <Container className={classes.quoteContainer} style={{'backgroundImage': `url(${props.imagePath})`, 'background-size':'100% 100%','backgroundRepeat':'no-repeat'}}>
+        <Container className={classes.quoteContainer} style={{'backgroundImage': `url(${props.imagePath})`, 'backgroundSize':'100% 100%','backgroundRepeat':'no-repeat'}}>
                 <Typography variant='h5' className={classes.quote}>
                     {props.quote}
                 <br/>

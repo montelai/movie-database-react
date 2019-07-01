@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Input, FormControl, Typography} from '@material-ui/core'
+import {Container, Input, FormControl, Typography,Link, Button} from '@material-ui/core'
 import {withStyles} from "@material-ui/styles";
 
 
@@ -21,7 +21,9 @@ const styles = {
         width:'50%',
         color:'#e5e5e5',
         border:1,
-        borderColor: 'white'
+        borderColor: 'white',
+        display: 'flex',
+        flexDirection: 'row'
     },
     searchBarSearch: {
         textAlign: 'center',
@@ -38,11 +40,22 @@ class SearchBar extends Component{
     state = {
         query: null
     }
+
+    handleSearch = () => {
+        this.props.querySearch(this.state.query)
+    }
+
+    handleKeyDown = (event) => {
+        if (event === 'Enter'){
+            this.handleSearch()
+        }
+    }
+
     render() {
         const {classes} = this.props
         return (
             <Container className={classes.searchBarContainer}>
-                <Typography>Movie Review Db</Typography>
+                <Typography><Link href='/'>Movie Review Db</Link></Typography>
                 <FormControl className={classes.searchBar}>
                     <Input 
                         classes={{root:classes.searchBarSearch, underline:classes.underline}} 
@@ -52,8 +65,10 @@ class SearchBar extends Component{
                         onChange={(event)=> {
                             this.setState({
                                 query: event.target.value
-                            })
-                    }}/>
+                            })}}
+                        onKeyDown={this.handleKeyDown}    
+                        />
+                    <Button variant='contained' onClick={this.handleSearch} style={{'backgroundColor':'#e5e5e5'}}>Search</Button>
                 </FormControl>
             </Container>
         )
