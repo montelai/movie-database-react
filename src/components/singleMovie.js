@@ -3,9 +3,32 @@ import {Grid, Typography, Paper} from '@material-ui/core'
 
 export default function SingleMovie(props) {
 
-    console.log(props)
-    let movieData = props.data.filter(movie => movie.id != props.movieId)[0];
-    console.log(movieData)
+    // console.log(props)
+    let movieData = []
+
+    if (props.fromSearch == true){
+        movieData = props.searchdata.filter(movie => movie.id == props.movieId)[0];
+    } else {
+        if (props.tabIndex == 0){
+            movieData = props.data.filter(movie => movie.id == props.movieId)[0];
+        } else {
+            movieData = props.tvdata.filter(movie => movie.id == props.movieId)[0];
+        }
+        
+    }
+
+    if (movieData == null){
+        movieData = {
+            data :  [
+              {id: 299537,original_title: "Captain Marvel",poster_path: "/AtsgWhDnHTq68L0lLsUrCnM7TjG.jpg",backdrop_path: "/w2PMyoyLU22YvrGK3smVM9fW1jj.jpg",title: "Captain Marvel",release_date: "2019-03-06",vote_average: 7,vote_count: 6019, overview: 'lorem30asdfasdfsdf'},
+              {id: 2995127,original_title: "Captain Marvel",poster_path: "/AtsgWhDnHTq68L0lLsUrCnM7TjG.jpg",backdrop_path: "/w2PMyoyLU22YvrGK3smVM9fW1jj.jpg",title: "Captain Marvel",release_date: "2019-03-06",vote_average: 7,vote_count: 6019}
+            ],
+            movieId: "486131"
+          }
+    }
+    console.log(props, movieData)
+    
+    // console.log(movieData)
 
 
     return (
@@ -29,7 +52,5 @@ export default function SingleMovie(props) {
         </Grid>
         <Grid></Grid>
     </Paper>
-    
-
     )
 }

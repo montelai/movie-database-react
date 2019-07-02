@@ -18,7 +18,7 @@ export default function Navigation(props) {
                 textColor="primary">
                 <Tab label="Movies" value={0} />
                 <Tab label="Television" value={1}/>
-                <Tab label="Actors" value={2}/>
+                {/* <Tab label="Actors" value={2}/> */}
             </Tabs>
         </Container>
     )

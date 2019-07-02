@@ -14,7 +14,7 @@ import People from './components/actors';
 import NoMatch from './components/nomatch';
 import SingleMovie from './components/singleMovie';
 import SearchResults from './components/searchResults';
-import TestPage from './components/testpage';
+// import TestPage from './components/testpage';
 class App extends Component {
 
   state = {
@@ -33,7 +33,8 @@ class App extends Component {
     
 
     //tab state
-    tabIndex: 0
+    tabIndex: 0,
+    fromSearch: false
   }
 
   testdata = {
@@ -119,7 +120,8 @@ class App extends Component {
   handleTabChange = (id) => {
     console.log('App Level Tab Index', id)
     this.setState({
-      tabIndex:id
+      tabIndex:id,
+      fromSearch: false
     })
     this.props.history.push(`/${this.tabs[id]}`)
   }
@@ -130,9 +132,9 @@ class App extends Component {
     //query is a list of movies
    let data = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=79d3f74963659c61aaca378b810882a6&language=en-US&query=${query}&page=1&include_adult=false`)
       .then(res => {
-      console.log(res)
-      this.setState({movieQuery: query, movieQueryData: res.data.results})
-      console.log(this.props.history)
+      
+      console.log(res.data)
+      this.setState({movieQuery: query, movieQueryData: res.data.results, fromSearch:true})
       this.props.history.push(`/search/${query}`)
       })
   }
@@ -159,7 +161,7 @@ class App extends Component {
         <Route exact path='/latestmovie' render={props => <LatestMovie {...props} data={this.state.movieData} onClick={this.handleMovieSelection}/>} />
         <Route exact path='/television' render={props => <Television {...props} data={this.state.tvData} onClick={this.handleMovieSelection}/>} />
         <Route exact path='/actors' render={props => <People {...props} data={this.state.peopleData} onClick={this.handleMovieSelection}/>} />
-        <Route path='/catalog/:id' render={props => <SingleMovie {...props} data={this.state.movieData} movieId={this.state.movieSelected}/>}/>
+        <Route path='/catalog/:id' render={props => <SingleMovie {...props} data={this.state.movieData} tvdata={this.state.tvData} searchdata={this.state.movieQueryData} fromSearch={this.state.fromSearch} tabIndex={this.state.tabIndex} movieId={this.state.movieSelected}/>}/>
         <Route path='/search/:query' render={props => <LatestMovie {...props} data={this.state.movieQueryData} onClick={this.handleMovieSelection}/>}/>
         {/* <Route path='/test' render={props => <TestPage {...props} data={this.state.}/>}/> */}
         <Route component={NoMatch} />
