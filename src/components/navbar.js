@@ -16,9 +16,9 @@ export default function Navigation(props) {
                 style={{'backgroundColor':'white', 'borderRadius':'10px'}}
                 indicatorColor="primary"
                 textColor="primary">
-                <Tab label="In theatre" value={0} />
-                <Tab label="Upcoming" value={1}/>
-                <Tab label="Rentals" value={2}/>
+                <Tab label="Movies" value={0} />
+                <Tab label="Television" value={1}/>
+                <Tab label="Actors" value={2}/>
             </Tabs>
         </Container>
     )
